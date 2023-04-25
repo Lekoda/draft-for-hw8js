@@ -1,8 +1,6 @@
 import SimpleLightbox from "simplelightbox";
 import 'simplelightbox/dist/simple-lightbox.min.css';
 // Add imports above this line
-import { galleryItems } from './gallery-items';
-// Change code below this line
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const galleryBox = document.querySelector('.gallery');
@@ -29,15 +27,15 @@ function getPreview(evt) {
     if (!evt.target.classList.contains('gallery__image')) {
         return;
     }
-const instance = basicLightbox.create(
-    `<img src="${evt.target.dataset.source}" width="800" height="600">`,
-    {
-    onShow: () => 
-        window.addEventListener('keydown', onEscKeyPress),
-    onClose: () => 
-        window.removeEventListener('keydown', onEscKeyPress),  
-}
-)
+    const instance = new SimpleLightbox(
+        `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+        {
+            onShow: () =>
+                window.addEventListener('keydown', onEscKeyPress),
+            onClose: () =>
+                window.removeEventListener('keydown', onEscKeyPress),
+        }
+    );
 function onEscKeyPress(evt) {
     const ESC_KEY_CODE = 'Escape';
     const isEscKey = ESC_KEY_CODE;
