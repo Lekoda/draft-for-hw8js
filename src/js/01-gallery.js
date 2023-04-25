@@ -20,30 +20,9 @@ const galleryBox = document.querySelector('.gallery');
     galleryBox.insertAdjacentHTML('beforeend', markUp);
 })()
 
-galleryBox.addEventListener('click', getPreview)
-
-function getPreview(evt) {
-    evt.preventDefault();
-    if (!evt.target.classList.contains('gallery__image')) {
-        return;
-    }
-    const instance = new SimpleLightbox(
-        `<img src="${evt.target.dataset.source}" width="800" height="600">`,
-        {
-            onShow: () =>
-                window.addEventListener('keydown', onEscKeyPress),
-            onClose: () =>
-                window.removeEventListener('keydown', onEscKeyPress),
-        }
-    );
-function onEscKeyPress(evt) {
-    const ESC_KEY_CODE = 'Escape';
-    const isEscKey = ESC_KEY_CODE;
-    if (isEscKey) {
-    instance.close();
-    }
-}
-instance.show();
-}
+new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+    });
 console.log(galleryItems);
-
